@@ -17,5 +17,7 @@ maxKwh=58
 chargeTill=50
 ```
 
-Thanks to @nightsha-de and @adhyh for the library to connect to VW.
-Also thanks to the Wattpilot library from @joscha82
+Used libraries:
+- [npm-vwconnectidapi](https://github.com/nightsha-de/npm-vwconnectapi) based on [
+npm-vwconnectapi](https://github.com/nightsha-de/npm-vwconnectapi)
+- [wattpilot](https://github.com/joscha82/wattpilot)
