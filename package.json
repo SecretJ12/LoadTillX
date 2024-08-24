@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "npm-vwconnectapi": "file:../npm-vwconnectapi",
+    "npm-vwconnectidapi": "file:../npm-vwconnectidapi",
+    "request": "^2.88.2"
+  }
+}
