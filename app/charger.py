@@ -1,14 +1,11 @@
 import os
 import argparse
 from time import sleep
-from dotenv import load_dotenv
 import wattpilot
 from math import ceil
 
-load_dotenv()
-
-ip = os.environ['wattpilot_IP']
-password = os.environ['wattpilot_PW']
+ip = os.getenv('wattpilot_IP')
+password = os.getenv('wattpilot_PW')
 
 parser = argparse.ArgumentParser()
 parser.add_argument("toCharge", help="Amount to charge at minimum")
