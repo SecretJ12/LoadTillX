@@ -1,5 +1,5 @@
 
-# LoadTillX
+# LoadTillX v0.2
 
 This project tries to optimize the loading between a VW ID and a Fronius Wattpilot.
 You can choose a minimal SOC (in %) that should always be available for the next day trip.

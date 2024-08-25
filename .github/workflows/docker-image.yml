@@ -3,7 +3,7 @@ name: Build and Push Docker Image
 on:
   push:
     tags:
-      - 'v*.*'
+      - 'v*.*.*'
 
 
 jobs:
@@ -17,11 +17,12 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            secretj12/loadtillx
             ghcr.io/secretj12/loadtillx
           # generate Docker tags based on the following events/attributes
           tags: |
+            type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
 
       - name: Checkout code
         uses: actions/checkout@v3
@@ -36,8 +37,14 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GH_PAT }}
 
+      - name: Debug metadata outputs
+        run: |
+          echo "Tags: ${{ steps.meta.outputs.tags }}"
+          echo "Labels: ${{ steps.meta.outputs.labels }}"
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
