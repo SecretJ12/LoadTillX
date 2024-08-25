@@ -11,9 +11,7 @@ else
   cd ../..
   npm install
 
-  # install wattpilot
-  pip install python-dotenv
-  pip install wattpilot
-  pip install flask
+  pip install python-dotenv wattpilot flask
+  pip install waitress
   echo "Everything installed."
 fi

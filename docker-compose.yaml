@@ -9,6 +9,8 @@ services:
     environment:
       - chargeTill=50
       - maxKwh=58
+      - IP=0.0.0.0
+      - PORT=5000
       - wattpilot_IP=$WATTPILOTIP
       - wattpilot_PW=$WATTPILOTPW
       - vw_username=$VWUSERNAME
