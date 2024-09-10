@@ -1,6 +1,7 @@
 {
+  "type": "module",
   "dependencies": {
-    "dotenv": "^16.4.5",
+    "express": "^4.20.0",
     "npm-vwconnectidapi": "file:lib/npm-vwconnectidapi",
     "request": "^2.88.2"
   }

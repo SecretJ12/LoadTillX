@@ -3,6 +3,7 @@
 services:
   app:
     image: ghcr.io/secretj12/loadtillx:latest
+    build: .
     ports:
       - 5000:5000
     environment:
