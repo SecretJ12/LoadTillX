@@ -61,7 +61,7 @@ function convertData(idData) {
             rearLeft: getWindowStatus("rearLeft"),
         },
         battery: {
-            time: idData.charging.batteryStatus.value.carCapturedTimestamp,
+            time: new Date(idData.charging.batteryStatus.value.carCapturedTimestamp),
             SOC: idData.charging.batteryStatus.value.currentSOC_pct,
             range: idData.charging.batteryStatus.value.cruisingRangeElectric_km,
             charging: {

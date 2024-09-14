@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LoadTillX</title>
+</head>
+<body>
+    <h1>LoadTillX</h1>
+    <p>
+        Daten von: <%= time%><br>
+        Aktueller Ladestand: <%= SOC %>%<br>
+        Reichweite: <%= range%>km<br>
+        Ladestatus: <%= chargingState%>
+    </p>
+    <label for="loadTill">
+        Lade bis
+    </label>
+    <input type="number" id="loadTill" value="<%= defaultTill%>" />
+    <button id="start">Starten</button>
+
+    <script>
+        document.getElementById('start')
+            .addEventListener('click', function() {
+                const loadTill = document.getElementById('loadTill').value;
+
+                if (loadTill)
+                    window.location.replace(`/loadtillx/start?loadTill=${loadTill}`)
+                else
+                    window.location.replace("/loadtillx/start")
+            })
+    </script>
+</body>
+</html>

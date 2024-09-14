@@ -8,8 +8,24 @@ const port = env.PORT;
 import {getData} from "./vw.js";
 import * as child_process from "node:child_process";
 
+app.set('view engine', 'ejs');
+
+app.get("/loadtillx", async (req, res) => {
+    const data = await getData()
+    const rendData = {
+        defaultTill: env.chargeTill,
+        time: data.battery.time.toLocaleString('de'),
+        SOC: data.battery.SOC,
+        range: data.battery.range,
+        chargingState: data.battery.charging.state
+    }
+    res.render('overview', rendData)
+})
+
 app.get('/loadtillx/start', async (req, res) => {
-    run()
+    const loadTill = req.query.loadTill
+    console.log(`Loading till ${loadTill}`)
+    run(loadTill)
     res.redirect('/loadtillx/started')
 });
 
@@ -20,16 +36,18 @@ app.get('/loadtillx/started', async (req, res) => {
     res.send(body)
 });
 
-async function run() {
+function calculateAmount(SOC, chargeTill) {
+    if (SOC < env.chargeTill)
+        return ((chargeTill || env.chargeTill) - SOC) * env.maxKwh * 10
+    else
+        return  0
+}
+
+async function run(chargeTill) {
     const data = await getData()
     const SOC = data.battery.SOC;
 
-    let toCharge
-    if (SOC < env.chargeTill)
-        toCharge = (env.chargeTill - SOC) * env.maxKwh * 10
-    else
-        toCharge = 0
-
+    let toCharge = calculateAmount(SOC, chargeTill)
 
     child_process.exec(`python charger.py ${toCharge}`, (error, stdout, stderr) => {
         if (error) {
