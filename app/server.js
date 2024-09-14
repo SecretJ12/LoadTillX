@@ -37,8 +37,9 @@ app.get('/loadtillx/started', async (req, res) => {
 });
 
 function calculateAmount(SOC, chargeTill) {
-    if (SOC < env.chargeTill)
-        return ((chargeTill || env.chargeTill) - SOC) * env.maxKwh * 10
+    const till = chargeTill || env.chargeTill
+    if (SOC < till)
+        return (till - SOC) * env.maxKwh * 10
     else
         return  0
 }
