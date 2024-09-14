@@ -8,9 +8,16 @@ const port = env.PORT;
 import {getData} from "./vw.js";
 import * as child_process from "node:child_process";
 
-app.get('/start', async (req, res) => {
+app.get('/loadtillx/start', async (req, res) => {
     run()
-    res.send("Script started!");
+    res.redirect('/loadtillx/started')
+});
+
+app.get('/loadtillx/started', async (req, res) => {
+    const data = await getData()
+    const body = `Script start!<br>
+    Current SOC: ${data.battery.SOC}`
+    res.send(body)
 });
 
 async function run() {
